@@ -1,0 +1,145 @@
+/* ---------- Variables ---------- */
+:root {
+  --bg: #f4f1ea;
+  --ink: #1e1c1a;
+  --accent: #7a3b2e;
+  --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ---------- Reset ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Splash page ---------- */
+body.splash {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background image layer */
+.splash-bg {
+  position: fixed;
+  inset: 0;
+  background-image: url('../images/landing-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  /* If no image yet, a soft tonal fallback shows through */
+  background-color: #d8d2c4;
+  filter: brightness(0.92) contrast(1.02);
+  z-index: 0;
+}
+
+/* Slight vignette so the centred text stays legible over any image */
+.splash-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.55) 100%
+  );
+}
+
+/* Centre content */
+.splash-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+  color: #fff;
+}
+
+.band-name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 4rem);
+  letter-spacing: 0.01em;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+}
+
+/* Enter button */
+.enter-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  transition: border-color 0.25s ease, opacity 0.25s ease;
+}
+
+.enter-btn:hover,
+.enter-btn:focus-visible {
+  border-color: #fff;
+  outline: none;
+}
+
+.enter-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Audio confirmation message */
+.audio-confirm {
+  margin-top: 1.5rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  opacity: 0.75;
+}
+
+/* Mute toggle */
+.audio-toggle {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 2;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.45);
+  background: rgba(0,0,0,0.25);
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.audio-toggle:hover,
+.audio-toggle:focus-visible {
+  background: rgba(0,0,0,0.5);
+  outline: none;
+}
+
+.audio-toggle.muted .icon-playing {
+  /* swap glyph via text content in JS; styling stays the same */
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .band-name { font-size: 1.8rem; }
+  .audio-toggle { top: 0.9rem; right: 0.9rem; }
+}

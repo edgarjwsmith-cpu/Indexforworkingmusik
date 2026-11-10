@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index for Working Musik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="splash">
+
+  <!-- Background image -->
+  <div class="splash-bg" role="img" aria-label="Background image"></div>
+
+  <!-- Audio element: source is a placeholder until you add your own -->
+  <audio id="bg-audio" loop preload="auto">
+    <source src="audio/track.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Audio toggle (appears once audio is playing) -->
+  <button id="audio-toggle" class="audio-toggle" aria-label="Mute audio" hidden>
+    <span class="icon-playing">◼</span>
+  </button>
+
+  <!-- Centre content -->
+  <main class="splash-content">
+    <h1 class="band-name">Index for Working Musik</h1>
+    <button id="enter-btn" class="enter-btn" type="button">Enter</button>
+    <p id="audio-confirm" class="audio-confirm" hidden>Audio playing — mute toggle top right.</p>
+  </main>
+
+  <script src="js/audio.js"></script>
+</body>
+</html>
