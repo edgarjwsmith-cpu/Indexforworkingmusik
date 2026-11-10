@@ -34,7 +34,7 @@ body.splash {
 .splash-bg {
   position: fixed;
   inset: 0;
-  background-image: url('../images/landing-bg.jpg');
+  background-image: url('../Images/landing-bg.jpg');
   background-size: cover;
   background-position: center;
   /* If no image yet, a soft tonal fallback shows through */
