@@ -234,7 +234,7 @@ body.is-locked { overflow: hidden; }
 .enter-btn {
   background: none;
   border: none;
-  cursor: url('images/cursor.png') 12 12, pointer;
+  cursor: url('../images/cursor.png') 12 12, pointer;
   color: #fff;
   font-family: var(--sans);
   font-size: 0.95rem;
@@ -276,8 +276,8 @@ body.is-locked { overflow: hidden; }
     transition: none;
   }
 }
-#section-bg.home-bg { background-image: url('images/home-bg.jpg'); }
-#section-bg.discography-bg { background-image: url('images/discography-bg.jpg'); }
-#section-bg.press-bg { background-image: url('images/press-bg.jpg'); }
-#section-bg.contact-bg { background-image: url('images/contact-bg.jpg'); }
-#section-bg.game-bg { background-image: url('images/game-bg.jpg'); }
+#section-bg.home-bg { background-image: url('../images/home-bg.jpg'); }
+#section-bg.discography-bg { background-image: url('../images/discography-bg.jpg'); }
+#section-bg.press-bg { background-image: url('../images/press-bg.jpg'); }
+#section-bg.contact-bg { background-image: url('../images/contact-bg.jpg'); }
+#section-bg.game-bg { background-image: url('../images/game-bg.jpg'); }
