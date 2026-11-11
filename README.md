@@ -1,6 +1,7 @@
 # Index for Working Musik — Website
 
 Static site for the band Index for Working Musik.
+><(((((((*>
 
 ## Current state
 
