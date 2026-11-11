@@ -77,7 +77,8 @@ body.splash {
 .enter-btn {
   background: none;
   border: none;
-  cursor: pointer;
+  * ...existing properties stay as they are... */
+  cursor: url('../images/cursor.png') 12 12, pointer;
   color: #fff;
   font-family: var(--sans);
   font-size: 0.95rem;
