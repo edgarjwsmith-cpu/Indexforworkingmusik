@@ -9,28 +9,52 @@
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="splash">
+<body class="is-locked">
 
-  <!-- Background image -->
-  <div class="splash-bg" role="img" aria-label="Background image"></div>
-
-  <!-- Audio element: source is a placeholder until you add your own -->
+  <!-- ============ AUDIO (never touched by section swaps) ============ -->
   <audio id="bg-audio" loop preload="auto">
     <source src="audio/track.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Audio toggle (appears once audio is playing) -->
+  <!-- ============ SECTION BACKGROUND (behind everything) ============ -->
+  <div id="section-bg" class="section-bg"></div>
+
+  <!-- ============ PERSISTENT HEADER ============ -->
+  <header class="site-header">
+    <nav class="main-nav">
+      <a href="#" class="nav-link active" data-section="home">Home</a>
+      <span class="sep">+</span>
+      <a href="#" class="nav-link" data-section="discography">Discography</a>
+      <span class="sep">+</span>
+      <a href="#" class="nav-link" data-section="press">Press</a>
+      <span class="sep">+</span>
+      <a href="#" class="nav-link" data-section="contact">Contact</a>
+      <span class="sep">+</span>
+      <a href="#" class="nav-link" data-section="game">Game</a>
+    </nav>
+  </header>
+
+  <!-- ============ SWAPPABLE CONTENT ============ -->
+  <main id="content" class="content">
+    <!-- sections.js fills this in on load -->
+  </main>
+
+  <!-- ============ AUDIO TOGGLE (appears once playing) ============ -->
   <button id="audio-toggle" class="audio-toggle" aria-label="Mute audio" hidden>
     <span class="icon-playing">◼</span>
   </button>
 
-  <!-- Centre content -->
-  <main class="splash-content">
-    <h1 class="band-name">Index for Working Musik</h1>
-    <button id="enter-btn" class="enter-btn" type="button">Enter</button>
-    <p id="audio-confirm" class="audio-confirm" hidden>Audio playing — mute toggle top right.</p>
-  </main>
+  <!-- ============ SPLASH OVERLAY (sits on top of everything) ============ -->
+  <div id="splash" class="splash">
+    <div class="splash-bg" role="img" aria-label="Background image"></div>
+    <div class="splash-content">
+      <h1 class="band-name">Index for Working Musik</h1>
+      <button id="enter-btn" class="enter-btn" type="button">Enter</button>
+      <p id="audio-confirm" class="audio-confirm" hidden>Audio playing — mute toggle top right.</p>
+    </div>
+  </div>
 
+  <script src="js/sections.js"></script>
   <script src="js/audio.js"></script>
 </body>
 </html>

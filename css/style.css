@@ -19,43 +19,201 @@ body {
   font-size: 18px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ---------- Splash page ---------- */
-body.splash {
+/* Prevent scrolling while the splash is up */
+body.is-locked { overflow: hidden; }
+
+/* ---------- Per-section background ---------- */
+.section-bg {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: #d8d2c4;
+  filter: brightness(0.85) contrast(1.05);
+  z-index: 0;
+}
+
+.section-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- Header ---------- */
+.site-header {
   position: relative;
-  overflow: hidden;
+  z-index: 2;
+  padding: 1.5rem 2rem;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active { color: #fff; }
+
+.sep {
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+/* ---------- Content area ---------- */
+.content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
+  color: #fff;
 }
 
-/* Background image layer */
-.splash-bg {
+.panel {
+  max-width: 720px;
+  width: 100%;
+  text-align: center;
+}
+
+.panel h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  margin-bottom: 1.5rem;
+}
+
+.news-box {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.news-box h2 {
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: var(--sans);
+  margin-bottom: 0.75rem;
+}
+
+.release-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+}
+
+.release {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+}
+
+.release img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.release:hover img { border-color: #fff; }
+
+.placeholder {
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* ---------- Audio toggle ---------- */
+.audio-toggle {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 3;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.audio-toggle:hover,
+.audio-toggle:focus-visible {
+  background: rgba(0, 0, 0, 0.5);
+  outline: none;
+}
+
+/* ---------- Splash overlay ---------- */
+.splash {
   position: fixed;
   inset: 0;
-  background-image: url('../Images/landing-bg.jpg');
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.splash.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0s linear 0.8s;
+}
+
+.splash-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/landing-bg.jpg');
   background-size: cover;
   background-position: center;
-  /* If no image yet, a soft tonal fallback shows through */
   background-color: #d8d2c4;
   filter: brightness(0.92) contrast(1.02);
   z-index: 0;
 }
 
-/* Slight vignette so the centred text stays legible over any image */
 .splash-bg::after {
   content: '';
   position: absolute;
   inset: 0;
   background: radial-gradient(
     ellipse at center,
-    rgba(0,0,0,0.15) 0%,
-    rgba(0,0,0,0.55) 100%
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.55) 100%
   );
 }
 
-/* Centre content */
 .splash-content {
   position: relative;
   z-index: 1;
@@ -70,21 +228,20 @@ body.splash {
   font-size: clamp(2rem, 6vw, 4rem);
   letter-spacing: 0.01em;
   margin-bottom: 2.5rem;
-  text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
 }
 
-/* Enter button */
 .enter-btn {
   background: none;
   border: none;
-  cursor: url('../images/cursor.png') 12 12, pointer;
+  cursor: pointer;
   color: #fff;
   font-family: var(--sans);
   font-size: 0.95rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 0.6rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   transition: border-color 0.25s ease, opacity 0.25s ease;
 }
 
@@ -94,12 +251,8 @@ body.splash {
   outline: none;
 }
 
-.enter-btn:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
+.enter-btn:disabled { opacity: 0.4; cursor: default; }
 
-/* Audio confirmation message */
 .audio-confirm {
   margin-top: 1.5rem;
   font-family: var(--sans);
@@ -108,38 +261,18 @@ body.splash {
   opacity: 0.75;
 }
 
-/* Mute toggle */
-.audio-toggle {
-  position: fixed;
-  top: 1.25rem;
-  right: 1.25rem;
-  z-index: 2;
-  width: 2.4rem;
-  height: 2.4rem;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.45);
-  background: rgba(0,0,0,0.25);
-  color: #fff;
-  font-size: 0.9rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s ease;
-}
-
-.audio-toggle:hover,
-.audio-toggle:focus-visible {
-  background: rgba(0,0,0,0.5);
-  outline: none;
-}
-
-.audio-toggle.muted .icon-playing {
-  /* swap glyph via text content in JS; styling stays the same */
-}
-
 /* Small screens */
 @media (max-width: 480px) {
   .band-name { font-size: 1.8rem; }
   .audio-toggle { top: 0.9rem; right: 0.9rem; }
+}
+
+/* Reduced motion: no fades */
+@media (prefers-reduced-motion: reduce) {
+  .splash,
+  .splash.is-hidden,
+  .nav-link,
+  .enter-btn {
+    transition: none;
+  }
 }

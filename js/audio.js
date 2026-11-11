@@ -1,15 +1,16 @@
 (function () {
   'use strict';
 
-  var audio       = document.getElementById('bg-audio');
-  var enterBtn    = document.getElementById('enter-btn');
-  var toggle      = document.getElementById('audio-toggle');
-  var confirmMsg  = document.getElementById('audio-confirm');
+  var audio      = document.getElementById('bg-audio');
+  var enterBtn   = document.getElementById('enter-btn');
+  var toggle     = document.getElementById('audio-toggle');
+  var confirmMsg = document.getElementById('audio-confirm');
+  var splash     = document.getElementById('splash');
 
   var STORAGE_KEY = 'ifwm_audio_playing';
 
-  /* ---------- Enter: start audio ---------- */
-  enterBtn.addEventListener('click', function () {
+  /* ---------- Enter: play audio, fade splash, unlock scroll ---------- */
+  function enterSite() {
     audio.volume = 0.6;
 
     var playPromise = audio.play();
@@ -17,20 +18,35 @@
     if (playPromise !== undefined) {
       playPromise
         .then(function () {
-          // Audio started successfully
           sessionStorage.setItem(STORAGE_KEY, 'true');
-          showPlayingState();
+          toggle.hidden = false;
+          confirmMsg.hidden = false;
         })
         .catch(function (err) {
-          // Most likely: audio file missing, or playback blocked
+          // Audio failed (missing file, blocked autoplay, etc.)
+          // Still enter the site — just without sound.
           console.warn('Audio could not play:', err);
-          alert(
-            'Audio could not play.\n\n' +
-            'This usually means the file audio/track.mp3 is missing ' +
-            'or has not been added yet. Add your MP3 to the audio/ ' +
-            'folder and reload the page.'
-          );
+          confirmMsg.hidden = false;
+          confirmMsg.textContent = 'Audio unavailable — entering without sound.';
         });
+    }
+
+    // Fade out splash and unlock scroll regardless of audio outcome
+    splash.classList.add('is-hidden');
+    document.body.classList.remove('is-locked');
+
+    // Focus the first nav link so keyboard users land somewhere sensible
+    var firstNav = document.querySelector('.nav-link');
+    if (firstNav) firstNav.focus();
+  }
+
+  enterBtn.addEventListener('click', enterSite);
+
+  // Keyboard: Enter or Space on the splash also enters
+  splash.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      enterSite();
     }
   });
 
@@ -49,18 +65,8 @@
     }
   });
 
-  /* ---------- Show playing UI ---------- */
-  function showPlayingState() {
-    toggle.hidden = false;
-    confirmMsg.hidden = false;
-    enterBtn.disabled = true;
-    enterBtn.textContent = 'Entered';
-  }
-
   /* ---------- If audio was already playing before reload ---------- */
   if (sessionStorage.getItem(STORAGE_KEY) === 'true') {
-    // Browsers may still block autoplay, so we don't force it;
-    // we just show the toggle so the user can resume manually.
     toggle.hidden = false;
   }
 })();
