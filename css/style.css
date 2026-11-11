@@ -234,7 +234,7 @@ body.is-locked { overflow: hidden; }
 .enter-btn {
   background: none;
   border: none;
-  cursor: url('../images/cursor.png') 12 12, pointer;
+  cursor: url('/images/cursor.png') 12 12, pointer;
   color: #fff;
   font-family: var(--sans);
   font-size: 0.95rem;
