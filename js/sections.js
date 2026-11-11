@@ -75,8 +75,9 @@
 
     content.innerHTML = section.html;
 
+    bgLayer.className = 'section-bg';
     if (section.bg) {
-      bgLayer.style.backgroundImage = 'url("' + section.bg + '")';
+      bgLayer.classList.add(name + '-bg');
     }
 
     navLinks.forEach(function (link) {
