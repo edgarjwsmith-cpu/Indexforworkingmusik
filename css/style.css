@@ -312,3 +312,86 @@ body.is-locked { overflow: hidden; }
 #section-bg.press-bg { background-image: url('../images/press-bg.jpg'); }
 #section-bg.contact-bg { background-image: url('../images/contact-bg.jpg'); }
 #section-bg.game-bg { background-image: url('../images/game-bg.jpg'); }
+/* ---------- Press / Scrapbook Section ---------- */
+.content.press-active {
+  align-items: flex-start; /* Allows content to flow from the top */
+  overflow-y: auto;        /* Enables scrolling */
+  padding-bottom: 5rem;
+}
+
+.scrapbook {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+  padding: 2rem 1rem;
+}
+
+.scrapbook h2.section-title {
+  font-family: 'UnifrakturCook', cursive;
+  font-size: 3.5rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+.scrapbook blockquote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 1.4;
+  border-left: 4px solid var(--accent);
+  padding-left: 1.5rem;
+  margin: 3rem 0;
+  color: #fff;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.scrapbook blockquote cite {
+  display: block;
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.scrapbook h3 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+}
+
+.scrapbook p {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: rgba(255,255,255,0.9);
+}
+
+/* The image clippings */
+.scrapbook img.press-clipping {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 3rem auto;
+  border: 6px solid #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+  transform: rotate(-1.5deg);
+  transition: transform 0.3s ease;
+}
+
+.scrapbook img.press-clipping:nth-of-type(even) {
+  transform: rotate(1.5deg); /* Alternate tilt for a messy scrapbook feel */
+}
+
+.scrapbook img.press-clipping:hover {
+  transform: rotate(0deg) scale(1.02);
+  z-index: 10;
+  position: relative;
+}
